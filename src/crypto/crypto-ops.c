@@ -342,16 +342,6 @@ int fe_isnonzero(const fe f) {
     s[27] | s[28] | s[29] | s[30] | s[31]) - 1) >> 8) + 1;
 }
 
-int fe_cmp(const fe a, const fe b)
-{
-  for (size_t i = 9; i != SIZE_MAX; --i)
-  {
-    if ((const uint32_t)a[i] < (const uint32_t)b[i]) return -1;
-    if ((const uint32_t)a[i] > (const uint32_t)b[i]) return 1;
-  }
-  return 0;
-}
-
 /* From fe_mul.c */
 
 /*
@@ -970,7 +960,7 @@ Postconditions:
    |h| bounded by 1.1*2^26,1.1*2^25,1.1*2^26,1.1*2^25,etc.
 */
 
-static void fe_sub(fe h, const fe f, const fe g) {
+void fe_sub(fe h, const fe f, const fe g) {
   int32_t f0 = f[0];
   int32_t f1 = f[1];
   int32_t f2 = f[2];
